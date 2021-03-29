@@ -5,19 +5,24 @@
  */
 package csapatmunka;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kelek
  */
 public class muveletek extends javax.swing.JFrame {
-
+    int szam1 = 0;
+    int szam2 = 0;
+    String vegeredmeny = "";
+    int eredmeny = 0;
     /**
      * Creates new form muveletek
      */
     public muveletek() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,34 +33,49 @@ public class muveletek extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jLabel1 = new javax.swing.JLabel();
+        kerdes = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        ellenorzes = new javax.swing.JButton();
+        megoldas = new javax.swing.JButton();
+        megoldasHelye = new javax.swing.JTextField();
+        ujkerdes = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        szorzas = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel1.setText("Kérdés helye");
+        kerdes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        kerdes.setText("Kérdés helye");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel2.setText("Válasz:");
 
-        jButton1.setText("Ellenőrzés");
+        ellenorzes.setText("Ellenőrzés");
+        ellenorzes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ellenorzesActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Megoldás");
+        megoldas.setText("Megoldás");
+        megoldas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                megoldasActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Új kérdés");
+        ujkerdes.setText("Új kérdés");
+        ujkerdes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ujkerdesActionPerformed(evt);
+            }
+        });
 
         jMenu2.setText("Műveletek");
 
@@ -65,8 +85,13 @@ public class muveletek extends javax.swing.JFrame {
         jMenuItem1.setText("Kivonás");
         jMenu2.add(jMenuItem1);
 
-        jMenuItem3.setText("Szorzás");
-        jMenu2.add(jMenuItem3);
+        szorzas.setText("Szorzás");
+        szorzas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                szorzasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(szorzas);
 
         jMenuItem4.setText("Osztás");
         jMenu2.add(jMenuItem4);
@@ -83,43 +108,65 @@ public class muveletek extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(kerdes, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(megoldasHelye, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(ellenorzes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(megoldas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(ujkerdes)
                 .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(kerdes, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(megoldasHelye, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))
+                            .addComponent(megoldas)
+                            .addComponent(ellenorzes)
+                            .addComponent(ujkerdes))
                         .addGap(97, 97, 97))))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void szorzasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_szorzasActionPerformed
+        szorzas();
+    }//GEN-LAST:event_szorzasActionPerformed
+
+    private void ujkerdesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ujkerdesActionPerformed
+        szorzas();
+    }//GEN-LAST:event_ujkerdesActionPerformed
+
+    private void ellenorzesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ellenorzesActionPerformed
+        vegeredmeny = megoldasHelye.getText()+"";
+        eredmeny = Integer.valueOf(vegeredmeny);
+        if (szam1*szam2 == eredmeny) {
+            JOptionPane.showMessageDialog(this, "A megoldásod helyes!", "Visszajelzés", 1);
+        } else {
+            JOptionPane.showMessageDialog(this, "A megoldásod rossz!", "Visszajelzés", 1);
+        }
+    }//GEN-LAST:event_ellenorzesActionPerformed
+
+    private void megoldasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_megoldasActionPerformed
+        JOptionPane.showMessageDialog(this, "A helyes helyes: "+szam1*szam2, "Visszajelzés", 1);
+    }//GEN-LAST:event_megoldasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,18 +204,24 @@ public class muveletek extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton ellenorzes;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel kerdes;
+    private javax.swing.JButton megoldas;
+    private javax.swing.JTextField megoldasHelye;
+    private javax.swing.JMenuItem szorzas;
+    private javax.swing.JButton ujkerdes;
     // End of variables declaration//GEN-END:variables
+
+    private void szorzas() {
+        szam1 = (int) (Math.random() * 9)+1;
+        szam2 = (int) (Math.random() * 9)+1;
+        kerdes.setText(szam1+" * "+szam2+" =");
+    }
 }
